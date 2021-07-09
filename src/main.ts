@@ -5,7 +5,8 @@ import router from './router';
 import { Prop } from './typings';
 
 // createApp(App).use(router).mount('#app');
-let instance = null;
+
+let instance: any;
 
 function render(props: Prop) {
   const { container } = props;
@@ -26,6 +27,7 @@ export async function mount(props: Prop) {
 }
 
 export async function unmount() {
-  // instance.unmount();
-  // instance._container.innerHTML = '';
+  instance.unmount();
+  instance._container.innerHtml = '';
+  instance = null;
 }

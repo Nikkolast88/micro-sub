@@ -1,20 +1,21 @@
 const path = require('path');
 // const { name } = require('./package');
 const { name } = require('./package.json');
-
+const { buildConfig } = require('./buildConfig.json');
+const port = 3000;
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
-
+const env = process.env.NODE_ENV;
 module.exports = {
-  publicPath: 'child/vue3',
-  outputDir: 'dist',
+  publicPath: env === 'development' ? `http://localhost:${port}` : `${buildConfig[env]}${name}/`,
+  outputDir: 'micro-sub',
   assetsDir: 'static',
   filenameHashing: true,
   devServer: {
     hot: true,
     disableHostCheck: true,
-    port: 3000,
+    port,
     overlay: {
       warnings: false,
       errors: true,

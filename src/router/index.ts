@@ -1,6 +1,6 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
-
+const { name } = require('../../package.json');
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(window.__POWERED_BY_QIANKUN__ ? '#/vue3' : '/'),
+  history: createWebHistory(window.__POWERED_BY_QIANKUN__ ? '/micro-sub' : `/${name}`),
   routes,
 });
 
