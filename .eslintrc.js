@@ -5,14 +5,13 @@ module.exports = {
     node: true,
   },
   extends: [
-    'plugin:vue/base',
-    'plugin:vue/vue3-essential',
-    'plugin:vue/vue3-strongly-recommended',
-    'plugin:vue/vue3-recommended',
-    'eslint:recommended',
+    "plugin:vue/vue3-essential",
+    "eslint:recommended",
+    "@vue/typescript/recommended",
+    "@vue/prettier",
+    "@vue/prettier/@typescript-eslint"
   ],
   parserOptions: {
-    'parser': '@typescript-eslint/parser',
     ecmaVersion: 2020,
   },
   rules: {
@@ -27,5 +26,6 @@ module.exports = {
       'afterColon': true,
     }],//  强制对象文字属性中的键和值之间保持一致的间距
     'space-infix-ops': 2, // 要求在运算符之间加空格
+    '@typescript-eslint/no-var-requires': 'off',
   },
 };

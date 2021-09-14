@@ -1,4 +1,4 @@
 <template>
-  <router-view />
+  <div>{{ $t('Menu') }}</div>
 </template>
 <script setup lang="ts"></script>
