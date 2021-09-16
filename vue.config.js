@@ -1,6 +1,7 @@
 const path = require('path');
 const { name } = require('./package');
 module.exports = {
+  publicPath: './',
   devServer: {
     port: 8081,
     headers: {

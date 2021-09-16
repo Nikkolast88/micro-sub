@@ -1,6 +1,5 @@
 import { App } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import { I18n, Composer } from 'vue-i18n';
 import type { RouteRecordRaw, Router } from 'vue-router';
 import { createRouterGuards } from './RouterGuards';
 
@@ -17,14 +16,9 @@ modules.keys().forEach((key: string) => {
 
 export function setupRouter(
   app: App,
-  i18n: I18n,
   routes?: Array<RouteRecordRaw>,
   routeBase?: string,
 ): Router {
-  const locale: string =
-    i18n.mode === 'legacy'
-      ? i18n.global.locale
-      : (i18n.global as unknown as Composer).locale.value;
   const constantRouter: Array<RouteRecordRaw> = [
     {
       path: '/',

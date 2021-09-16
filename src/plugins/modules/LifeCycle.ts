@@ -100,8 +100,8 @@ const render = async (props: Props): Promise<void> => {
   //   .use(store)
   //   .mount(container ? container.querySelector('#app') : '#app');
   setupStore(instance);
-  const i18n = setupI18n(instance);
-  router = setupRouter(instance, i18n, routes, routerBase);
+  setupI18n(instance);
+  router = setupRouter(instance, routes, routerBase);
 
   await router.isReady();
 
