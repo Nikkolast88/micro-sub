@@ -30,9 +30,9 @@ export function setupRouter(
     //   redirect: () => `/${locale}`,
     // },
   ];
-
+  console.log(__qiankun__);
   const router = createRouter({
-    history: createWebHistory(__qiankun__ ? routeBase : '/'),
+    history: createWebHistory(__qiankun__ ? '/apps/micro-sub/' : '/'),
     routes: __qiankun__ ? constantRouter || [] : constantRouter,
   });
   app.use(router);

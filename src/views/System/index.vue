@@ -1,4 +1,4 @@
 <template>
-  <div>{{ $t('Menu') }}</div>
+  <div>Menu</div>
 </template>
 <script setup lang="ts"></script>

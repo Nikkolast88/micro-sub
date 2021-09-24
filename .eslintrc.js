@@ -27,5 +27,9 @@ module.exports = {
     }],//  强制对象文字属性中的键和值之间保持一致的间距
     'space-infix-ops': 2, // 要求在运算符之间加空格
     '@typescript-eslint/no-var-requires': 'off',
+    'no-undef': 'off', // vue文件识别不到命名空间
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'prettier/prettier': 'off',
   },
 };
