@@ -1,9 +1,12 @@
 const path = require('path');
 const { name } = require('./package');
+const { buildConfig } = require('./buildConfig.json');
+const port = 8081;
+const env = process.env.NODE_ENV;
 module.exports = {
-  publicPath: './',
+  publicPath: env === 'development' ? `http://localhost:${port}` : `${buildConfig[env]}${name}/`,
   devServer: {
-    port: 8081,
+    port: port,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },

@@ -25,14 +25,10 @@ export function setupRouter(
       name: 'Index',
       component: () => import('@/views/System/index.vue'),
     },
-    // {
-    //   path: '/:pathMatch(.*)*',
-    //   redirect: () => `/${locale}`,
-    // },
   ];
-  console.log(__qiankun__);
+
   const router = createRouter({
-    history: createWebHistory(__qiankun__ ? '/apps/micro-sub/' : '/'),
+    history: createWebHistory(__qiankun__ ? routeBase : '/'),
     routes: __qiankun__ ? constantRouter || [] : constantRouter,
   });
   app.use(router);
