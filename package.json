@@ -7,7 +7,8 @@
     "build:dev": "vue-cli-service build --mode development",
     "build:test": "vue-cli-service build --mode test",
     "build:prod": "vue-cli-service build --mode production",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lint:stylelint": "stylelint --fix \"**/*.{vue,less,postcss,scss}\" --cache --cache-location node_modules/.cache/stylelint/"
   },
   "dependencies": {
     "axios": "^0.21.4",
@@ -42,7 +43,8 @@
     "stylelint-config-standard": "^22.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.4.0",
     "stylelint-order": "^4.1.0",
-    "typescript": "~4.1.5"
+    "typescript": "~4.1.5",
+    "vue-svg-loader": "^0.17.0-beta.2"
   },
   "browserslist": [
     "> 1%",

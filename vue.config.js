@@ -1,10 +1,11 @@
 const path = require('path');
 const { name } = require('./package');
-const accessPath = process.env.VUE_APP_ACCESS_PATH;
-
+//
+const publicPath = process.env.VUE_APP_PUBLIC_PATH;
+const assetPath = process.env.VUE_APP_ASSET_PATH;
 const port = 8081;
 module.exports = {
-  publicPath: accessPath,
+  publicPath: publicPath,
   devServer: {
     port: port,
     headers: {
@@ -12,8 +13,57 @@ module.exports = {
     },
   },
   chainWebpack: (config) => {
+    const svgRule = config.module.rule('svg');
+
+    svgRule.uses.clear();
     config.resolve.alias.set('@', path.resolve('./src'));
     config.resolve.alias.set('vue-i18n', 'vue-i18n/dist/vue-i18n.cjs.js');
+
+    svgRule
+      .oneOf('component')
+      .resourceQuery(/component/)
+      .use('vue-loader-v16')
+      .loader('vue-loader-v16')
+      .end()
+      .use('vue-svg-loader')
+      .loader('vue-svg-loader')
+      .end()
+      .end()
+      .oneOf('external')
+      .use('file-loader')
+      .loader('file-loader')
+      .options({
+        name: 'assets/[name].[hash:8].[ext]',
+      });
+    config.module
+      .rule('fonts')
+      .use('url-loader')
+      .loader('url-loader')
+      .options({
+        limit: 4096, // 小于4kb将会被打包成 base64
+        fallback: {
+          loader: 'file-loader',
+          options: {
+            name: 'fonts/[name].[hash:8].[ext]',
+            assetPath,
+          },
+        },
+      })
+      .end();
+    config.module
+      .rule('images')
+      .use('url-loader')
+      .loader('url-loader')
+      .options({
+        limit: 10240, // 小于4kb将会被打包成 base64
+        fallback: {
+          loader: 'file-loader',
+          options: {
+            name: 'img/[name].[hash:8].[ext]',
+            assetPath,
+          },
+        },
+      });
   },
   configureWebpack: {
     output: {
