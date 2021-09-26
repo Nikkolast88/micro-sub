@@ -43,8 +43,8 @@ const lifeCycle = (): Func => {
      * @description  bootstrap 只会在微应用初始化的时候调用一次，下次微应用重新进入时会直接调用 mount 钩子，不会再重复触发
      * @description 通常我们可以在这里做一些全局变量的初始化，比如不会在 unmount 阶段被销毁的应用级别的缓存等
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async bootstrap(props: unknown) {
-      console.log('props:', props);
       /* props.emits.forEach(i => {
         Vue.prototype[`$${i.name}`] = i;
       }); */
@@ -75,8 +75,9 @@ const lifeCycle = (): Func => {
      * @param {Object} props 主应用下发的props
      * @description 可选生命周期钩子，仅使用 loadMicroApp 方式手动加载微应用时生效
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async update(props: unknown) {
-      console.log('update props', props);
+      // props
     },
   };
 };
@@ -91,14 +92,7 @@ const render = async (props: Props): Promise<void> => {
   const { routes, routerBase, container } = props;
   // Vue.config.productionTip = false;
   instance = createApp(Root);
-  // router = createRouter({
-  //   history: createWebHistory(__qiankun__ ? routerBase : '/'),
-  //   routes: __qiankun__ ? routeMatch(routes, routerBase) : selfRoutes,
-  // });
-  // instance = createApp(App)
-  //   .use(router)
-  //   .use(store)
-  //   .mount(container ? container.querySelector('#app') : '#app');
+
   setupStore(instance);
   setupI18n(instance);
   router = setupRouter(instance, routes, routerBase);

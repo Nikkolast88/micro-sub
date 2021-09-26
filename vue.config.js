@@ -1,10 +1,10 @@
 const path = require('path');
 const { name } = require('./package');
-const { buildConfig } = require('./buildConfig.json');
+const accessPath = process.env.VUE_APP_ACCESS_PATH;
+
 const port = 8081;
-const env = process.env.NODE_ENV;
 module.exports = {
-  publicPath: env === 'development' ? `http://localhost:${port}` : `${buildConfig[env]}${name}/`,
+  publicPath: accessPath,
   devServer: {
     port: port,
     headers: {

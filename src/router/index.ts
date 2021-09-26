@@ -25,8 +25,12 @@ export function setupRouter(
       name: 'Index',
       component: () => import('@/views/System/index.vue'),
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('@/views/Exception/404.vue'),
+    },
   ];
-
   const router = createRouter({
     history: createWebHistory(__qiankun__ ? routeBase : '/'),
     routes: __qiankun__ ? constantRouter || [] : constantRouter,
