@@ -2,8 +2,8 @@
 interface Window {
   manifest: {
     API: string;
+    IMG: string;
     NAME: string;
-    APPS: [];
   };
   __POWERED_BY_QIANKUN__: string;
 }

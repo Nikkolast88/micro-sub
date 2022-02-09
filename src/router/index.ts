@@ -23,12 +23,12 @@ export function setupRouter(
     {
       path: '/',
       name: 'Index',
-      component: () => import('@/views/System/index.vue'),
+      component: () => import('@/views/System/SystemView.vue'),
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
-      component: () => import('@/views/Exception/404.vue'),
+      component: () => import('@/views/Exception/NotFound.vue'),
     },
   ];
   const router = createRouter({

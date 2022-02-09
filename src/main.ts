@@ -1,10 +1,12 @@
 import './public-path';
 
-import { lifeCycle, render } from '@/plugins';
-
-const { bootstrap, mount, unmount } = lifeCycle();
-
-export { bootstrap, mount, unmount };
+import { lifeCycle } from '@/plugins';
+import { SingleApp } from './plugins/modules/SingleApp';
 
 const __qiankun__ = window.__POWERED_BY_QIANKUN__;
-__qiankun__ || render({});
+
+if (__qiankun__) {
+  lifeCycle();
+} else {
+  SingleApp();
+}

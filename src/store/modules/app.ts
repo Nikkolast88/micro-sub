@@ -1,10 +1,8 @@
-const state = {};
-const mutations = {};
-const actions = {};
+import { defineStore } from 'pinia';
 
-export default {
-  namespace: true,
-  state,
-  mutations,
-  actions,
-};
+export const useAppStore = defineStore({
+  id: 'useAppStore',
+  state: () => ({}),
+  getters: {},
+  actions: {},
+});

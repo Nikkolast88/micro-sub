@@ -1,7 +1,5 @@
-import { App, createApp } from 'vue';
-import { setupStore } from '@/store';
-import { setupRouter } from '@/router';
-import { setupI18n } from '@/plugins';
+import { setupRender, resetRender } from './SetUp';
+import type { RouteRecordRaw } from 'vue-router';
 interface Props {
   routes?: RouteRecordRaw[];
   routerBase?: string;
@@ -13,29 +11,11 @@ interface Func {
   unmount: () => void;
   update: (props: Props) => unknown;
 }
-// import { createRouter, createWebHistory } from 'vue-router';
-import Root from '@/App.vue';
-import { RouteRecordRaw } from 'vue-router';
-// import store from '@/store';
-// import selfRoutes from '@/router/routes';
-
-/**
- * @name 导入自定义路由匹配方法
- */
-// import routeMatch from '@/router/routes-match';
-/**
- * @name 导入官方通信方法
- */
-// import appStore from '@/utils/app-store';
-
-// const __qiankun__ = window.__POWERED_BY_QIANKUN__;
-let router = null;
-let instance: App<Element> | null = null;
 
 /**
  * @name 导出生命周期函数
  */
-const lifeCycle = (): Func => {
+export const lifeCycle = (): Func => {
   return {
     /**
      * @name 微应用初始化
@@ -58,17 +38,13 @@ const lifeCycle = (): Func => {
       // 注册应用间通信
       // appStore(props);
       // 注册微应用实例化函数
-      render(props);
+      setupRender(props);
     },
     /**
      * @name 微应用卸载/切出
      */
     async unmount() {
-      if (instance) {
-        instance.unmount();
-      }
-      instance = null;
-      router = null;
+      resetRender();
     },
     /**
      * @name 手动加载微应用触发的生命周期
@@ -81,25 +57,3 @@ const lifeCycle = (): Func => {
     },
   };
 };
-
-/**
- * @name 子应用实例化函数
- * @param {Object} props param0 qiankun将用户添加信息和自带信息整合，通过props传给子应用
- * @description {Array} routes 主应用请求获取注册表后，从服务端拿到路由数据
- * @description {String} 子应用路由前缀 主应用请求获取注册表后，从服务端拿到路由数据
- */
-const render = async (props: Props): Promise<void> => {
-  const { routes, routerBase, container } = props;
-  // Vue.config.productionTip = false;
-  instance = createApp(Root);
-
-  setupStore(instance);
-  setupI18n(instance);
-  router = setupRouter(instance, routes, routerBase);
-
-  await router.isReady();
-
-  const _container = container ? container.querySelector('#app') : '#app';
-  instance.mount(_container as Element | string);
-};
-export { lifeCycle, render };

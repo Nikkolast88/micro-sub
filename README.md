@@ -3,25 +3,31 @@
 ## Project setup
 
 ```javascript
-npm install
+pnpm install
 ```
 
 ### Compiles and hot-reloads for development
 
 ```javascript
-npm run serve
+pnpm run serve
 ```
 
 ### Compiles and minifies for production
 
 ```javascript
-npm run build
+pnpm run build
+```
+
+### Run your unit tests
+
+```javascript
+pnpm run test:unit
 ```
 
 ### Lints and fixes files
 
 ```javascript
-npm run lint
+pnpm run lint
 ```
 
 ### Customize configuration
