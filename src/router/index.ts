@@ -1,7 +1,7 @@
 import { App } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import type { RouteRecordRaw, Router } from 'vue-router';
-import { createRouterGuards } from './RouterGuards';
+// import { createRouterGuards } from './RouterGuards';
 
 const __qiankun__ = window.__POWERED_BY_QIANKUN__;
 const modules = require.context('./modules', true, /\.ts$/);
@@ -13,7 +13,7 @@ modules.keys().forEach((key: string) => {
   const modList = Array.isArray(mod) ? [...mod] : [mod];
   routeModules.push(...modList);
 });
-
+console.log('routeModules', routeModules);
 export function setupRouter(
   app: App,
   routes?: Array<RouteRecordRaw>,
@@ -22,8 +22,7 @@ export function setupRouter(
   const constantRouter: Array<RouteRecordRaw> = [
     {
       path: '/',
-      name: 'Index',
-      component: () => import('@/views/System/SystemView.vue'),
+      redirect: '/login',
     },
     {
       path: '/:pathMatch(.*)*',
@@ -33,7 +32,9 @@ export function setupRouter(
   ];
   const router = createRouter({
     history: createWebHistory(__qiankun__ ? routeBase : '/'),
-    routes: __qiankun__ ? constantRouter || [] : constantRouter,
+    routes: __qiankun__
+      ? constantRouter || []
+      : [...constantRouter, ...routeModules],
   });
   app.use(router);
   /**
@@ -41,7 +42,8 @@ export function setupRouter(
    * @param {*}
    * @return {*}
    */
-  createRouterGuards(router);
+  // createRouterGuards(router);
+  console.log(router);
   return router;
 }
 

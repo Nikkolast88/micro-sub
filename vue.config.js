@@ -35,6 +35,7 @@ module.exports = {
     // const svgRule = config.module.rule('svg');
 
     // svgRule.uses.clear();
+    config.resolve.alias.set('vue-i18n', 'vue-i18n/dist/vue-i18n.cjs.js');
     config.resolve.alias.set('@', path.resolve('./src'));
 
     // svgRule
